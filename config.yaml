@@ -1,4 +1,4 @@
-categories: ["cs.CV", "cs.LG", "cs.AI"]
+categories: ["cs.LG", "math.DS", "cs.AI", "physics.space-ph", "physics.geo-ph"]
 keywords:
   - "open vocabulary"
   - "open-vocabulary"
@@ -31,7 +31,7 @@ summary:
 email:
   enabled: true
   subject: "[arXiv] Daily Digest"
-  smtp_server: "smtp.qq.com"
+  smtp_server: "smtp.163.com"
   smtp_port: 465
   smtp_pass_env: "SMTP_PASS"
   tls: "ssl"  # auto / ssl / starttls
