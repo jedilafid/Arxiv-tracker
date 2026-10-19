@@ -1,0 +1,890 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>arXiv 论文速递</title><style>
+:root {
+  --bg:#f8fafc; --card:#ffffff; --text:#0f172a; --muted:#667085; --border:#e5e7eb; --acc:#2563eb;
+}
+:root[data-theme="dark"] {
+  --bg:#0b0f17; --card:#111827; --text:#e5e7eb; --muted:#9ca3af; --border:#1f2937; --acc:#2563eb;
+}
+*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);
+  font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.6;}
+.container{max-width:900px;margin:0 auto;padding:18px;}
+.header{display:flex;gap:10px;justify-content:space-between;align-items:center;margin:8px 0 16px;flex-wrap:wrap}
+h1{font-size:22px;margin:0}
+.badge{font-size:12px;color:#111827;background:var(--acc);padding:2px 8px;border-radius:999px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px 18px;margin:14px 0;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.title{font-weight:700;margin:0 0 6px 0;font-size:18px}
+.meta-line{color:var(--muted);font-size:13px;margin:2px 0}
+.links a{color:var(--acc);text-decoration:none;margin-right:12px}
+.detail{margin-top:10px;background:rgba(2,6,23,.03);border:1px solid var(--border);border-radius:10px;padding:8px 10px}
+summary{cursor:pointer;color:var(--acc)}
+.mono{white-space:pre-wrap;background:rgba(2,6,23,.03);border:1px solid var(--border);padding:10px;border-radius:10px}
+.row{display:grid;grid-template-columns:1fr;gap:12px}
+@media (min-width: 860px) {
+  .row-2{grid-template-columns:1fr 1fr}
+}
+.footer{color:var(--muted);font-size:13px;margin:20px 0 10px}
+.hr{height:1px;background:var(--border);margin:14px 0}
+.history-list a{display:block;color:var(--acc);text-decoration:none;margin:4px 0}
+.controls{display:flex;gap:8px;align-items:center}
+.btn{border:1px solid var(--border);background:var(--card);padding:6px 10px;border-radius:10px;cursor:pointer;color:var(--text)}
+.btn:hover{border-color:var(--acc)}
+</style>
+<script>
+(function() {
+  const root = document.documentElement;
+  function apply(t) {
+    if (t==='dark') root.setAttribute('data-theme','dark');
+    else if (t==='light') root.removeAttribute('data-theme');
+    else {
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)
+        root.setAttribute('data-theme','dark');
+      else root.removeAttribute('data-theme');
+    }
+  }
+  let t = localStorage.getItem('theme') || 'light';
+  if (!['light','dark','auto'].includes(t)) t='light';
+  apply(t);
+  window.__toggleTheme = function() {
+    let cur = localStorage.getItem('theme') || 'light';
+    if (cur==='light') cur='dark';
+    else if (cur==='dark') cur='auto';
+    else cur='light';
+    localStorage.setItem('theme', cur);
+    apply(cur);
+    const el=document.getElementById('theme-label');
+    if(el) el.textContent = cur.toUpperCase();
+  }
+  window.__expandAll = function(open) {
+    document.querySelectorAll('details').forEach(d => d.open = !!open);
+  }
+})();
+</script>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>arXiv 论文速递</h1>
+      <div style="display:flex;gap:10px;align-items:center">
+        
+<div class="controls">
+  <button class="btn" onclick="__toggleTheme()">Theme: <span id="theme-label" style="margin-left:6px">AUTO</span></button>
+  <button class="btn" onclick="__expandAll(true)">Expand All</button>
+  <button class="btn" onclick="__expandAll(false)">Collapse All</button>
+</div>
+
+        <span class="badge">2026-10-20 06:48</span>
+      </div>
+    </div>
+    <div class="hr"></div>
+    <div>Snapshot: 20261020_0648</div>
+    <div class="row"><div class="card">
+<div class="title">LagNet: Lag-Structured Operators for Long-Term Time Series Forecasting</div>
+<div class="meta-line">Authors: Zhenan Yu, Guangxin Jiang, Jiuyun Jiang, Jin Yang</div>
+<div class="meta-line">First: 2026-10-16T16:44:53+00:00 · Latest: 2026-10-16T16:44:53+00:00</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2610.23735v1">Abs</a> · <a href="https://arxiv.org/pdf/2610.23735v1">PDF</a> · <a href="https://huggingface.co/huggingface">Code1</a> · <a href="https://huggingface.co/docs/hub/spaces">Code2</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">Long-term time series forecasting maps a finite history window to an extended future horizon. Many existing models focus primarily on the design of input representations and model structures, while paying less attention to the structural form of the history-to-future forecasting operator itself. We examine this operator directly and find that, across model families, sensitivity matrices exhibit recurring diagonal patterns whose diagonals correspond to relative temporal lags. Motivated by this observation, we develop a framework for direct multi-step forecasting based on lag-structured temporal operators. Its basic building block, LagLayer, constructs a Toeplitz matrix by tying history-to-future connections with the same relative lag and incorporates horizon-wise and history-wise scaling coefficients to relax exact sharing. This design enables LagLayer to serve as an effective replacement for temporal linear layers in existing forecasting models. Stacking LagLayer modules with activations and multiple feature maps yields LagNet. Experiments on long-term time series forecasting benchmarks show that our method is competitive with strong baselines, while sensitivity matrix diagnostics and limited-data experiments demonstrate that LagLayer provides an effective and sample-efficient alternative to a linear layer.</div></details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">Long-term time series forecasting maps a finite history window to an extended future horizon.</div>
+</details>
+</div>
+<div class="card">
+<div class="title">SelectArena: A Modern Benchmark for Feature Selection on Real-world Tabular Data</div>
+<div class="meta-line">Authors: Bastian Schäfer, Dominika Matus, Lennart Purucker, Ricardo Knauer, Erik Rodner, Frank Hutter, Anton Sokolov, Arnaud Liefooghe</div>
+<div class="meta-line">First: 2026-10-09T14:21:47+00:00 · Latest: 2026-10-16T14:56:25+00:00</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2610.13644v2">Abs</a> · <a href="https://arxiv.org/pdf/2610.13644v2">PDF</a> · <a href="https://huggingface.co/huggingface">Code1</a> · <a href="https://huggingface.co/docs/hub/spaces">Code2</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">Selecting a subset of features (columns) from a tabular dataset is a ubiquitous challenge in real-world applications. Industry experts seek to minimize model training costs, climate scientists require an interpretable subset of factors to understand extreme weather events, and clinicians need to choose among diagnostic tests due to financial and time constraints. When looking at the scientific literature to determine which feature selection method to use, practitioners across domains face an unrepresentative landscape of benchmarking. Despite extensive research, existing feature selection benchmarks provide limited guidance because they rely on outdated models, ad hoc evaluation protocols, or artificially generated data that do not reflect real-world problems. To close the gap between scientific benchmarking and real-world applications, we introduce SelectArena, a modern benchmark for feature selection. We compare 15 widely used feature selection methods on 71 manually curated real-world tabular datasets, covering classification and regression problems, using standardized evaluation protocols and state-of-the-art tabular (foundation) models. Our results reveal clear trade-offs across predictive performance, runtime, stability, and validity. Tree-based methods, CART and RFImportance, along with F-Test are Pareto-optimal when taking into account predictive performance and runtime. F-Test, information-theory-, and distance-based methods lead on stability and validity, with F-Test emerging as a balanced choice across our metrics. Search-based methods are slow, unstable and achieve low performance. SelectArena turns these findings into practical guidance and, as an extensible platform, supports future feature selection research.</div></details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">Selecting a subset of features (columns) from a tabular dataset is a ubiquitous challenge in real-world applications.</div>
+</details>
+</div>
+<div class="card">
+<div class="title">Time-partitioning Gaussian Process Mixture Model</div>
+<div class="meta-line">Authors: Guilherme Piantino, Hedibert F. Lopes</div>
+<div class="meta-line">First: 2026-10-14T19:52:23+00:00 · Latest: 2026-10-16T14:12:42+00:00</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2610.20860v2">Abs</a> · <a href="https://arxiv.org/pdf/2610.20860v2">PDF</a> · <a href="https://huggingface.co/huggingface">Code1</a> · <a href="https://huggingface.co/docs/hub/spaces">Code2</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">Nonstationarity and heterogeneous dynamics are common in financial and macroeconomic time series. Volatility alternates between calm and turbulent regimes, interest rates follow monetary-policy cycles, and major events trigger persistent structural shifts. We propose the Time-partitioning Gaussian Process Mixture Model (TPGPMM), a Bayesian nonparametric framework for regime identification and nonstationary prediction that infers such regimes and their within-regime dependence from data, without Markovian assumptions. It combines (i) an adaptive Pitman-Yor process prior on ordered compositions, mapped to block lengths with contiguity enforced by construction, and (ii) regime-specific Gaussian processes for temporal dependence, yielding a nonstationary predictive distribution. By inferring its discount parameter, the prior adapts to homogeneous and highly heterogeneous regime lengths. Unlike sequential or Markov-switching methods, it flags persistent structural shifts as change points rather than reacting to transient shocks. A split-merge Metropolis-within-Gibbs sampler with exact Gibbs updates of regime boundaries jointly learns change points and hyperparameters in batch, quantifying uncertainty over the partition and within-regime dynamics. With an RBF kernel and a fixed, data-informed noise level, TPGPMM produces a sparse, confident segmentation. On simulated data it recovers the true regimes, and on the CBOE Volatility Index and the 10-year US Treasury yield it identifies regimes aligned with documented market and monetary-policy events. For prediction, variants estimating the noise level fit better than change-point baselines and fit and forecast better than the main specification, at the cost of a less sparse or less event-aligned segmentation; with a regime mean, they fit better than a fitted stationary Gaussian process and have lower forecast RMSE except at the shortest horizons.</div></details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">Nonstationarity and heterogeneous dynamics are common in financial and macroeconomic time series.</div>
+</details>
+</div>
+<div class="card">
+<div class="title">RamanBench: A Large-Scale Benchmark for Machine Learning on Raman Spectroscopy</div>
+<div class="meta-line">Authors: Mario Koddenbrock, Christoph Lange, Robin Legner, Martin Jäger, Martin Kögler, Mariano N. Cruz Bournazou, Peter Neubauer, Felix Biessmann, Erik Rodner</div>
+<div class="meta-line">Venue: NeurIPS 2026</div>
+<div class="meta-line">First: 2026-05-03T18:12:42+00:00 · Latest: 2026-10-16T13:36:03+00:00</div>
+<div class="meta-line">Comments: https://huggingface.co/spaces/HTW-KI-Werkstatt/RamanBench</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2605.02003v4">Abs</a> · <a href="https://arxiv.org/pdf/2605.02003v4">PDF</a> · <a href="https://huggingface.co/spaces/HTW-KI-Werkstatt/RamanBench">Code1</a> · <a href="https://huggingface.co/huggingface">Code2</a> · <a href="https://huggingface.co/docs/hub/spaces">Code3</a> · <a href="https://pypi.org/project/raman-data/">Project1</a> · <a href="https://pypi.org/project/raman-bench/">Project2</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">Machine learning (ML) has transformed many scientific fields, yet key applications still lack standardized benchmarks. Raman spectroscopy, a widely used technique for non-invasive molecular analysis, is one such field where progress is limited by fragmented datasets, inconsistent evaluation, and models that fail to capture the structure of spectral data. We introduce RamanBench, the first large-scale, fully reproducible benchmark for ML on Raman spectroscopy, consisting of streamlined data access (https://pypi.org/project/raman-data/), evaluation protocols and code (https://pypi.org/project/raman-bench/), as well as a live leaderboard (https://huggingface.co/spaces/HTW-KI-Werkstatt/RamanBench). It unifies 77 datasets (including 17 first released with this benchmark) across four domains, comprising 325,862 spectra and spanning classification and regression tasks under diverse experimental conditions. We benchmark 28 models under a standardized protocol, including classical methods (e.g., PLS), Raman-specific (e.g., RamanNet), tabular foundation models (TFMs; e.g., TabPFN), and time-series approaches (e.g., ROCKET). TFMs consistently outperform domain-specific and gradient boosting baselines, while time-series models remain competitive. However, no single method dominates across these heterogeneous datasets, revealing that Raman spectroscopy remains an open challenge for machine learning. Therefore, we invite the community to contribute new approaches to our living benchmark, with the potential to accelerate advances in critical applications such as medical diagnostics, biological research, and materials science.</div></details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">Machine learning (ML) has transformed many scientific fields, yet key applications still lack standardized benchmarks.</div>
+</details>
+</div>
+<div class="card">
+<div class="title">Forecasting Voltage Time Series under Anomalies Using a WGAN Model With Lipschitz Control and Progressive Kernel Critic Strategy</div>
+<div class="meta-line">Authors: Najmieh Sadat Safarabadi</div>
+<div class="meta-line">First: 2026-10-16T12:52:32+00:00 · Latest: 2026-10-16T12:52:32+00:00</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2610.23394v1">Abs</a> · <a href="https://arxiv.org/pdf/2610.23394v1">PDF</a> · <a href="https://huggingface.co/huggingface">Code1</a> · <a href="https://huggingface.co/docs/hub/spaces">Code2</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">In time-series forecasting tasks, the use of recursive forecasting on high-dimensional data substantially increases the complexity of the prediction process. The main challenge is that long-term dynamics becomes harder to model, since the sequences show greater temporal variability. To counteract this limitation and improve the modeling of long-term dynamics, and more importantly, address high-dimensional recursive forecasting, this paper uses a Wasserstein GAN equipped with a progressive Lipschitz penalty and an adaptive kernel. This model is capable of taking a window of the data stream and forecasting the next values, subsequently reconstructing the time-series stream and dynamically adapting its kernel to each new window. The proopsed model is a deep learning framework based on a Wasserstein GAN (WGAN-CLP) with an adaptive kernel to model alterations in streaming voltage time series. To establish the methodological foundation, we review the WGAN-LP formulation another variant model in this class and extend its framework through an adaptive kernel critic model. We then evaluate this extended model using power ratios, correlation coefficient (CC), and relative root mean squared error (RRMSE). The experimental results demonstrate that the proposed model outperforms benchmark methods in both accuracy and robustness. The evaluation shows promising performance of the WGAN-CLP with an adaptive kernel framework in forecasting sequence alterations across the voltage and energy time-series datasets.</div></details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">In time-series forecasting tasks, the use of recursive forecasting on high-dimensional data substantially increases the complexity of the prediction process.</div>
+</details>
+</div>
+<div class="card">
+<div class="title">RTSM: Adapting Recursive Models to Multivariate Time-Series Classification</div>
+<div class="meta-line">Authors: Georg Tenzing, Anna Tegon, Luca Benini, Thorir Mar Ingolfsson</div>
+<div class="meta-line">First: 2026-10-16T11:59:34+00:00 · Latest: 2026-10-16T11:59:34+00:00</div>
+<div class="meta-line">Comments: 33 pages, 6 figures</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2610.23353v1">Abs</a> · <a href="https://arxiv.org/pdf/2610.23353v1">PDF</a> · <a href="https://huggingface.co/huggingface">Code1</a> · <a href="https://huggingface.co/docs/hub/spaces">Code2</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">Accurate multivariate time-series classification requires extracting temporal features and integrating information across a sequence. Weight-tied refinement offers a way to repeatedly process these features without allocating new parameters at each stage. Applying this principle to time series requires choosing both a temporal representation and a latent-state organization suited to classification. We introduce the Recursive Time-Series Model (RTSM), which combines a learned convolutional temporal tokenizer, single-state weight-tied refinement, and a pooled classification readout. Across all 30 UEA datasets, RTSM achieves 72.81% mean accuracy under validation-based configuration and checkpoint selection, the highest observed mean among the 17 evaluated deep-learning models and 1.60 percentage points above MambaSL. Ablations on eight datasets favor the proposed tokenizer over a simple convolutional embedding and the single-state model over the tested two-state variants. The complete classifier reaches 86.10% mean accuracy versus 84.79% for a separately trained tokenizer-only classifier. These findings identify temporal encoding and state organization as key design choices for adapting recursive architectures to time series. The resulting classifier combines competitive accuracy with a shared refinement module whose parameter count is independent of computational depth.</div></details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">Accurate multivariate time-series classification requires extracting temporal features and integrating information across a sequence.</div>
+</details>
+</div>
+<div class="card">
+<div class="title">OliO: ODE-based Linear Transition Operator for Self-Supervised Time Series Forecasting</div>
+<div class="meta-line">Authors: Kwangryeol Park, Seulki Lee</div>
+<div class="meta-line">Venue: NeurIPS 2026</div>
+<div class="meta-line">First: 2026-10-16T11:52:33+00:00 · Latest: 2026-10-16T11:52:33+00:00</div>
+<div class="meta-line">Comments: Accepted at NeurIPS 2026</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2610.23345v1">Abs</a> · <a href="https://arxiv.org/pdf/2610.23345v1">PDF</a> · <a href="https://github.com/eai-lab/OliO*">Code1</a> · <a href="https://huggingface.co/huggingface">Code2</a> · <a href="https://huggingface.co/docs/hub/spaces">Code3</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">Self-supervised representation learning has advanced time series forecasting by capturing robust features from unlabeled data. However, existing contrastive and masking-based methods often struggle to explicitly model the underlying temporal flow, either by treating time lag as noise or by disrupting the inherent temporal dynamics essential for forecasting. To address these limitations, we propose OliO (**O**DE-based **Li**near Transition **O**perator), a plug-and-play self-supervised learning method that learns bidirectional temporal flows as a continuous and structurally consistent dynamical system. OliO introduces a transition operator derived from linear Ordinary Differential Equations (ODEs) to align latent representations across arbitrary time shifts. By imposing a strictly upper triangular constraint on the transition matrix, we mathematically ensure numerical stability and enforce a robust polynomial boundary that effectively captures long-term dependencies while preventing the exponential divergence typically found in unconstrained ODE-based models. This structural constraint induces a temporally coherent representation space that preserves the underlying flow essential for accurate forecasting. Extensive experiments across various backbone architectures and benchmarks demonstrate that OliO achieves significant performance gains, providing Mean Squared Error (MSE) reductions of up to 5.75% over the most competitive grid-searched SOTA baselines. The code is available at *https://github.com/eai-lab/OliO*</div></details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">Self-supervised representation learning has advanced time series forecasting by capturing robust features from unlabeled data.</div>
+</details>
+</div>
+<div class="card">
+<div class="title">Data-Efficient Classifier Pretraining Through Diffusion Models</div>
+<div class="meta-line">Authors: Qinyu Li, Yee Whye Teh, Chris Holmes, Joel Jaskari</div>
+<div class="meta-line">First: 2026-10-16T10:57:49+00:00 · Latest: 2026-10-16T10:57:49+00:00</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2610.23289v1">Abs</a> · <a href="https://arxiv.org/pdf/2610.23289v1">PDF</a> · <a href="https://huggingface.co/huggingface">Code1</a> · <a href="https://huggingface.co/docs/hub/spaces">Code2</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">Machine learning with limited data is susceptible to overfitting, especially with modern deep neural networks. Prior to the introduction of AlexNet, reconstruction-based pretraining with auto-encoder and denoising auto-encoder were found to be beneficial, partially due to the limited size of the training sets at the time. Motivated by these traditional approaches, we propose DiffPT, a simple diffusion modeling approach to pretrain a given classifier backbone for limited domain-specific training data. We experiment on time-series data, standard natural-image benchmarks, and medical imaging datasets, and contrast the diffusion approach to a multitude of modern and traditional un/self-supervised methods. While contrastive pretraining performs better on CIFAR-10 and Tiny ImageNet in low-data regimes, DiffPT is particularly effective on medical imaging and time-series tasks, where it outperforms self-supervised baselines across a range of low-data regimes. Our results suggest that DiffPT is a simple and effective approach for data-efficient classifier pretraining on different modalities.</div></details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">Machine learning with limited data is susceptible to overfitting, especially with modern deep neural networks.</div>
+</details>
+</div>
+<div class="card">
+<div class="title">ASE: Attribution-Guided Semantic Evolution for Time Series Forecasting</div>
+<div class="meta-line">Authors: Yuxuan Zheng, Zhaoyang Li, Purui Liu, Hengbo Xiao, Guannan He</div>
+<div class="meta-line">First: 2026-10-16T07:04:41+00:00 · Latest: 2026-10-16T07:04:41+00:00</div>
+<div class="meta-line">Comments: 11 pages, 3 figures</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2610.23027v1">Abs</a> · <a href="https://arxiv.org/pdf/2610.23027v1">PDF</a> · <a href="https://huggingface.co/huggingface">Code1</a> · <a href="https://huggingface.co/docs/hub/spaces">Code2</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">External text can supply predictive information absent from numerical histories, but its value depends on how it is represented, combined and deployed. We present Attribution-guided Semantic Evolution (ASE), a modular framework for constructing textual factors, evaluating their conditional contribution, and deploying validation-selected numerical--textual predictors. ASE supports task-specific implementations with lexical measurements, semantic primitives or evolved event/state factors, coupled to suitable numerical experts. Its feedback-based implementation uses conditional refitting diagnostics to guide factor revision and combination search. We evaluate ASE on the four text-associated TESS datasets and dynamic CSI 300 stock ranking. The four forecasting implementations obtain test MSEs of 0.001041, 0.022439, 0.333115 and 1.8150, each below the corresponding published TESS score. On CSI 300, the frozen text-fusion implementation improves mean RankIC by 0.000642 over its numerical expert and by 0.000701 over matched shuffled text, with positive differences in all five seeds. Controlled text perturbations support functional reliance on text correspondence, while incumbent retention prevents regressions in the measured development criterion. Together, the experiments characterize ASE at two levels: forecasting performance of task-specific implementations and the conditional contributions of individual modules.</div></details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">External text can supply predictive information absent from numerical histories, but its value depends on how it is represented, combined and deployed.</div>
+</details>
+</div>
+<div class="card">
+<div class="title">STRIDE: Reasoning-Aware Training for Time Series Forecasting</div>
+<div class="meta-line">Authors: Md Atik Ahamed, Mihir Parmar, Palash Goyal, Chun-Liang Li, Qiang Cheng, Tomas Pfister, Jinsung Yoon</div>
+<div class="meta-line">First: 2026-05-09T02:41:47+00:00 · Latest: 2026-10-16T04:26:36+00:00</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2605.08625v2">Abs</a> · <a href="https://arxiv.org/pdf/2605.08625v2">PDF</a> · <a href="https://huggingface.co/huggingface">Code1</a> · <a href="https://huggingface.co/docs/hub/spaces">Code2</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">Time Series Foundation Models (TSFMs) excel at numerical forecasting but operate as black boxes lacking qualitative reasoning. Conversely, applying LLMs directly to temporal data introduces a modality gap: text tokenizers fragment continuous numerical values, degrading mathematical relationships and exploding sequence lengths, leading to computational overhead. To resolve this, we introduce STRIDE (Strategic Time-series Reasoning Injected via Distilled Embeddings), a novel framework natively integrating LLM reasoning into the continuous embedding space of TSFMs. Instead of discrete tokens, STRIDE distills reasoning traces into a lightweight LLM and dynamically projects its pooled hidden states as a continuous cross-modal prior into the numerical encoder. Jointly optimized via cross-entropy and quantile losses, STRIDE readily attaches to diverse architectures (e.g., Chronos-2, Timer-S1). STRIDE ranks #1 on the GIFT-Eval leaderboard (0.625 MASE, 0.423 CRPS) when ensembled with Synapse. On TFRBench, STRIDE consistently outperforms baselines in both forecasting accuracy and reasoning quality, with ablations confirming gains stem from strategic reasoning. Thus, injecting semantic reasoning as a continuous prior equips TSFMs with human-interpretable reasoning while improving predictive accuracy.</div></details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">Time Series Foundation Models (TSFMs) excel at numerical forecasting but operate as black boxes lacking qualitative reasoning.</div>
+</details>
+</div>
+<div class="card">
+<div class="title">Look Back, Correct Forward: Error Feedback Calibration for Time Series Forecasting</div>
+<div class="meta-line">Authors: Haonan Yang, Yulin He, Zhuo Li</div>
+<div class="meta-line">First: 2026-10-16T03:22:18+00:00 · Latest: 2026-10-16T03:22:18+00:00</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2610.22872v1">Abs</a> · <a href="https://arxiv.org/pdf/2610.22872v1">PDF</a> · <a href="https://huggingface.co/huggingface">Code1</a> · <a href="https://huggingface.co/docs/hub/spaces">Code2</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">Time series forecasting models are increasingly deployed in continuously evolving environments. After a forecast is issued, future observations gradually arrive and reveal how the model has failed. Existing methods mainly treat such observations as supervision for parameter updates. However, it remains unclear whether verified forecasting errors can themselves provide causal feedback for correcting future predictions. To address this, we introduce Error Feedback Calibration (EFC), a fully test-time framework for deterministic post-hoc correction of time series forecasting. EFC constructs a Causal Error Diagonal (CED) from revealed errors of overlapping historical forecasts, providing a fresh view of the frozen forecaster&#x27;s recent failure behavior. Then Cumulative Error Transport (CET) maps this error state to future residuals using cumulative estimation, while temporal out-of-sample validation controls the correction strength. Temporal Residual Learning (TRL) further predicts only the residual structure left after CET from recent CED trajectories, rather than relearning the entire forecasting error. Extensive experiments across forecasting backbones and datasets show that EFC broadly improves forecasting performance while substantially controlling harmful over correction.</div></details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">Time series forecasting models are increasingly deployed in continuously evolving environments.</div>
+</details>
+</div>
+<div class="card">
+<div class="title">CastClaw: A Human-in-the-Loop Autonomous Agent for Interactive Time Series Forecasting</div>
+<div class="meta-line">Authors: Xiaoyu Tao, Mingyue Cheng, Ze Guo, Bokai Pan, Qi Liu, Shijin Wang, Enhong Chen</div>
+<div class="meta-line">First: 2026-08-31T15:36:41+00:00 · Latest: 2026-10-16T03:09:22+00:00</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2608.30976v2">Abs</a> · <a href="https://arxiv.org/pdf/2608.30976v2">PDF</a> · <a href="https://huggingface.co/huggingface">Code1</a> · <a href="https://huggingface.co/docs/hub/spaces">Code2</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">Practical time-series forecasting requires domain knowledge, constraints, plausibility checks, and human intervention. We present CastClaw, an interactive forecasting system centered on an autonomous forecasting loop and supported by a forecasting-oriented harness. Users create and refine tasks in natural language through command-line and Web interfaces. An internal large language model (LLM) agent reads the task and evidence, selects a permitted tool action or request for human feedback, and uses checked results to decide whether to continue, revisit an analysis, switch a candidate, or stop. The harness supplies tool integration, controlled execution, state management, historical validation, and execution limits. npm distribution connects installation and configuration to interactive execution and forecast and report export. Across five public electricity-price datasets, CastClaw achieves the lowest point-estimate MSE and MAE among 16 baselines. A Nord Pool case study illustrates its inspectable decision process, while provincial electricity-load data from North China (January--June 2026) demonstrate offline task execution.</div></details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">Practical time-series forecasting requires domain knowledge, constraints, plausibility checks, and human intervention.</div>
+</details>
+</div>
+<div class="card">
+<div class="title">CastFlow: Bridging Evidence Acquisition and Accurate Prediction in Agentic Time Series Forecasting</div>
+<div class="meta-line">Authors: Bokai Pan, Mingyue Cheng, Xiaoyu Tao, Zhiding Liu, Shuo Yu, Yuchong Wu, Qi Liu, Defu Lian, Enhong Chen</div>
+<div class="meta-line">First: 2026-04-30T13:24:42+00:00 · Latest: 2026-10-16T03:01:02+00:00</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2604.27840v3">Abs</a> · <a href="https://arxiv.org/pdf/2604.27840v3">PDF</a> · <a href="https://github.com/Forever-Pan/CastFlow">Code1</a> · <a href="https://huggingface.co/huggingface">Code2</a> · <a href="https://huggingface.co/docs/hub/spaces">Code3</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">Time series forecasting is a fundamental task in temporal data analytics, and large language model (LLM)-based agents offer a promising paradigm through autonomous tool interaction and evidence-grounded reasoning. However, two fundamental challenges remain: how to acquire forecast-relevant evidence through adaptive tool interactions, and how to translate such evidence into accurate numerical predictions. To address these challenges, we propose CastFlow, a role-specialized agentic forecasting framework that bridges general-purpose tool reasoning and specialized temporal forecasting. Specifically, CastFlow introduces an Experience Memory that distills successful tool-use trajectories from training data, guiding a frozen LLM to orchestrate a multi-view toolkit for evidence acquisition. A lightweight specialized LLM then performs evidence-grounded temporal reasoning to refine an ensemble forecasting prior. To enhance this capability, we develop a two-stage training strategy combining supervised fine-tuning and reinforcement learning with verifiable rewards, where final forecasting outcomes of the overall workflow guide the optimization of the specialized model. Extensive experiments on ten real-world benchmarks demonstrate that CastFlow outperforms competitive baselines on nine datasets. Our findings highlight the importance of bridging autonomous evidence acquisition and specialized temporal reasoning for accurate and adaptive agentic forecasting. The source code is available at https://github.com/Forever-Pan/CastFlow.</div></details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">Time series forecasting is a fundamental task in temporal data analytics, and large language model (LLM)-based agents offer a promising paradigm through autonomous tool interaction and evidence-grounded reasoning.</div>
+</details>
+</div>
+<div class="card">
+<div class="title">Learning Agentic Time Series Forecasting via Trajectory Distillation and Memory-Based Reinforcement Learning</div>
+<div class="meta-line">Authors: Xiaoyu Tao, Mingyue Cheng, Yaguo Liu, Xingpeng Gao, Qingsong Wen, Shijin Wang, Enhong chen</div>
+<div class="meta-line">First: 2026-02-14T14:27:08+00:00 · Latest: 2026-10-16T02:31:16+00:00</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2602.13802v2">Abs</a> · <a href="https://arxiv.org/pdf/2602.13802v2">PDF</a> · <a href="https://huggingface.co/huggingface">Code1</a> · <a href="https://huggingface.co/docs/hub/spaces">Code2</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">Recent agentic time series forecasting (TSF) approaches use large language models (LLMs) to autonomously orchestrate analytical and forecasting tools and reason about temporal patterns using the resulting evidence. However, many such approaches rely on powerful LLMs in training-free, prompt-driven workflows, leaving open whether smaller models can learn these interaction and reasoning capabilities. In this paper, we introduce Cast-R1, an 8Bparameter agentic forecasting model trained through trajectory distillation and multi-turn reinforcement learning with structured memory. First, we develop a forecasting agent harness with specialized analysis and prediction tools to generate multi-turn interaction trajectories using a teacher LLM, which are subsequently evaluated and selected for supervised fine-tuning. Second, we apply group relative policy optimization (GRPO) across multi-turn forecasting episodes, with structured memory preserving diagnostic evidence and intermediate forecasts for state construction. Rewards based on prediction accuracy and temporal structure guide tool selection, model routing, and forecast refinement. A difficulty-aware curriculum combines sample filtering and progressive sample ordering during training. Extensive experiments on multiple datasets demonstrate the effectiveness of Cast-R1. These findings highlight the potential of forecasting-specific post-training to equip smaller LLMs with multi-turn, tool-augmented forecasting capabilities within structured workflows.</div></details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">Recent agentic time series forecasting (TSF) approaches use large language models (LLMs) to autonomously orchestrate analytical and forecasting tools and reason about temporal patterns using the resulting evidence.</div>
+</details>
+</div>
+<div class="card">
+<div class="title">Beyond Tokenization: Direct Timestep Embedding and Contrastive Alignment for Time-Series Question Answering</div>
+<div class="meta-line">Authors: Yafeng Wu, Huu Hiep Nguyen, Thin Nguyen, Hung Le</div>
+<div class="meta-line">First: 2026-06-17T12:07:23+00:00 · Latest: 2026-10-16T00:14:22+00:00</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2606.18986v2">Abs</a> · <a href="https://arxiv.org/pdf/2606.18986v2">PDF</a> · <a href="https://huggingface.co/huggingface">Code1</a> · <a href="https://huggingface.co/docs/hub/spaces">Code2</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">Recent advances in large language models (LLMs) have given rise to time-series question answering (TSQA), which formulates time-series analysis as natural-language question answering. However, directly feeding raw numerical series into LLMs suffers from a tokenization bottleneck: Byte Pair Encoding fragments continuous values into unstable tokens whose embeddings lack meaningful metric structure, resulting in the loss of magnitude, scale, and trend information. Prior methods use patch-based encoders that split the series into fixed windows, locking in one granularity that breaks patterns and hides exact timesteps, through a separate module that rarely transfers across datasets with different lengths or sampling rates. To address this challenge, we propose CADE (Contrastive Alignment with Direct Embedding), a novel framework for TSQA built upon two key components: direct timestep embedding and semantic alignment. The proposed framework maps each timestep directly into the LLM embedding space through a point-wise linear encoder and MLP projector, preserving exact index-level access while eliminating the need for patching and padding. To further bridge the semantic gap between time-series and language representations, we introduce a novel one-directional supervised contrastive loss that aligns time-series embeddings with frozen class-name text anchors. Experimental results on the public Time-MQA benchmark demonstrate that our framework consistently improves performance across six TSQA tasks, outperforming both open-source and proprietary LLM baselines.</div></details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">Recent advances in large language models (LLMs) have given rise to time-series question answering (TSQA), which formulates time-series analysis as natural-language question answering.</div>
+</details>
+</div>
+<div class="card">
+<div class="title">MOSAIC: Module Discovery via Sparse Additive Identifiable Causal Learning for Scientific Time Series</div>
+<div class="meta-line">Authors: Shicheng Fan, Nour Elhendawy, Jianle Sun, Ke Fang, Kun Zhang, Yihang Wang, Lu Cheng</div>
+<div class="meta-line">Venue: NeurIPS 2026</div>
+<div class="meta-line">First: 2026-05-06T23:57:44+00:00 · Latest: 2026-10-15T23:42:48+00:00</div>
+<div class="meta-line">Comments: Accepted at NeurIPS 2026. 39 pages, including references and appendices</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2605.05524v2">Abs</a> · <a href="https://arxiv.org/pdf/2605.05524v2">PDF</a> · <a href="https://huggingface.co/huggingface">Code1</a> · <a href="https://huggingface.co/docs/hub/spaces">Code2</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">Causal representation learning (CRL) seeks to recover latent variables with identifiability guarantees, typically up to permutation and component-wise reparameterization under appropriate assumptions. However, identifiability does not imply interpretability: latent semantics are typically assigned post hoc by alignment with known ground-truth factors. This limitation is particularly acute in scientific time series, where underlying mechanisms are unknown and discovering interpretable structure is a primary goal. In contrast, scientific observations (such as residue-pair distances, climate indices, or process sensors) are inherently semantic, as they correspond to named physical quantities. This raises a key question: can the interpretability of observations be transferred to the identifiable latent space? We propose MOSAIC (Module discovery via Sparse Additive Identifiable Causal learning), a sparse temporal VAE that integrates temporal CRL identifiability with support recovery over observed variables. MOSAIC identifies latent variables via regime-conditioned temporal variation, and recovers for each latent a sparse set of associated observations through an additive decoder, yielding module-level interpretability. We show that ANOVA main-effect supports are identifiable under general smooth mixing functions, with finite-sample recovery guarantees for a group-lasso estimator and empirical evaluation of MOSAIC&#x27;s entropy regularizer. Empirically, MOSAIC recovers domain-consistent variable groups across RNA molecular dynamics, solar wind, ENSO climate, the Tennessee Eastman process, and a synthetic tokamak benchmark, enabling interpretable discovery of latent mechanisms in scientific time series.</div></details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">Causal representation learning (CRL) seeks to recover latent variables with identifiability guarantees, typically up to permutation and component-wise reparameterization under appropriate assumptions.</div>
+</details>
+</div>
+<div class="card">
+<div class="title">Sharp Asymptotic Theory of Maximum Likelihood Estimation for Gaussian Processes with an RBF Kernel</div>
+<div class="meta-line">Authors: Ameer Qaqish, Sudipto Banerjee, Didong Li</div>
+<div class="meta-line">First: 2026-10-07T13:44:55+00:00 · Latest: 2026-10-15T22:32:10+00:00</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2610.10080v3">Abs</a> · <a href="https://arxiv.org/pdf/2610.10080v3">PDF</a> · <a href="https://huggingface.co/huggingface">Code1</a> · <a href="https://huggingface.co/docs/hub/spaces">Code2</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">Gaussian processes (GPs) are widely used across machine learning, spatial statistics, time-series analysis, optimization, Bayesian statistics, and scientific applications. A central component of a GP model is its kernel, which is typically specified through a parametric family. Among the most widely used choices is the radial basis function (RBF), also known as the squared exponential or Gaussian kernel, owing to its simple form, smoothness, and flexibility. In practice, the kernel parameters are routinely estimated by the maximum likelihood estimators (MLEs), as implemented by standard GP software. Despite this widespread use, the asymptotic behavior of the MLEs remains poorly understood under fixed-domain asymptotics, even for the RBF kernel. The main difficulty arises from the increasingly strong dependence among densely sampled observations and the nonlinear dependence of the covariance matrix on the kernel parameters. In this paper, we address this gap by providing, to the best of our knowledge, the first complete asymptotic characterization of the joint MLE of the spatial variance, lengthscale, and nugget variance under fixed-domain asymptotics. We establish consistency, derive convergence rates for all three parameters, prove joint asymptotic normality, and show that these rates are minimax optimal.</div></details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">Gaussian processes (GPs) are widely used across machine learning, spatial statistics, time-series analysis, optimization, Bayesian statistics, and scientific applications.</div>
+</details>
+</div>
+<div class="card">
+<div class="title">Network-Wide Freeway Speed Nowcasting and Forecasting from Sparse Fixed Sensors with a Probe-Supervised Graph Convolutional Recurrent Network</div>
+<div class="meta-line">Authors: Ran Tu, Zihao Li, Arash Mirzaei</div>
+<div class="meta-line">First: 2026-10-15T20:35:45+00:00 · Latest: 2026-10-15T20:35:45+00:00</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2610.22630v1">Abs</a> · <a href="https://arxiv.org/pdf/2610.22630v1">PDF</a> · <a href="https://huggingface.co/huggingface">Code1</a> · <a href="https://huggingface.co/docs/hub/spaces">Code2</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">Traffic agencies need current and near-future speeds on every link of their network, but their fixed sensors cover only part of it. We study joint nowcasting and next-hour forecasting of hourly speeds on all 4{,}127 directional freeway links of the Dallas--Fort Worth region from sensors on 643 links (15.6%). Historical probe-vehicle data supervise every link in training; only sensor readings are used at inference. We call this setting probe-supervised sparse sensing. We propose GCRN+, a graph convolutional recurrent network that predicts deviations from a historical speed profile. It combines a parameter-free, direction-aware kernel interpolation of sensor anomalies, used as input features and as an output baseline, with a diffusion-convolutional GRU on the directed road graph, a low-rank adaptive graph and learnable link embeddings. It scales linearly with network size and trains on a CPU. Sensor readings are emulated from probe speeds, which isolates spatio-temporal inference from detector calibration. On four held-out test days, GCRN+ attains an RMSE of 2.21~mph for the current hour and 2.39~mph for the next hour on unsensored links, against 3.23~mph for the historical average. The best baselines that use the same interpolation features reach 2.53 and 2.75~mph. Adapted recent models without these features (STID, STAEformer, ImputeFormer, MoGERNN) reach at best 2.54 and 2.53~mph; this comparison is between complete pipelines rather than architectures. GCRN+ is best in every distance band except links not connected to any sensor through the road graph. Ablations within one recurrent backbone attribute most of the gain to the link embeddings and the adaptive graph, which can be trained because probe labels exist for every link. For congestion detection on unsensored links, recall rises from 77\% (historical average) and 86% (best competitor) to 89% at aprecision of 0.94.</div></details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">Traffic agencies need current and near-future speeds on every link of their network, but their fixed sensors cover only part of it.</div>
+</details>
+</div>
+<div class="card">
+<div class="title">NeuralDMD: Interpretable Neural Representation of Dynamics from Sparse and Noisy Measurements</div>
+<div class="meta-line">Authors: Ali SaraerToosi, Renbo Tu, Esther Y. H. Lin, Kamyar Azizzadenesheli, Aviad Levis</div>
+<div class="meta-line">Venue: ECCV 2026</div>
+<div class="meta-line">First: 2025-07-03T18:05:56+00:00 · Latest: 2026-10-15T19:27:43+00:00</div>
+<div class="meta-line">Comments: 53 pages, 26 figures</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2507.03094v3">Abs</a> · <a href="https://arxiv.org/pdf/2507.03094v3">PDF</a> · <a href="https://huggingface.co/huggingface">Code1</a> · <a href="https://huggingface.co/docs/hub/spaces">Code2</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">Many challenges in scientific imaging involve solving ill-posed inverse problems, where the goal is to recover spatio-temporal fields from indirect, noisy, and highly sparse measurements - often without access to ground truth data or reliable simulators. To address this challenging scenario, we present NeuralDMD, an interpretable, untrained (per-instance) reconstruction framework that combines neural implicit representations with Dynamic Mode Decomposition (DMD) to reconstruct continuous spatio-temporal dynamics directly from measurements. NeuralDMD parameterizes DMD modes as continuous neural fields, and imposes a low-rank linear dynamics prior with spectral time evolution to enforce temporal continuity. This formulation enables both forecasting under sparsity, and yields interpretable modes and spectra. We find that NeuralDMD outperforms baselines on a wide variety of tasks: from weather data assimilation from sparse station observations to interferometric (Fourier domain) observations of Sagittarius A, the black hole at the center of our galaxy. Moreover, NeuralDMD remains stable when extrapolating into the future. While this framework is most naturally suited to linear dynamics, we show that it can be applied to nonlinear regimes, though with extrapolation performance that degrades with increasing nonlinearity. Together, these results show that NeuralDMD enables interpretable reconstruction and forecasting of spatio-temporal dynamics directly from sparse and indirect measurements without relying on numerical simulators or training data.</div></details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">Many challenges in scientific imaging involve solving ill-posed inverse problems, where the goal is to recover spatio-temporal fields from indirect, noisy, and highly sparse measurements - often without access to ground truth data or reliable simulators.</div>
+</details>
+</div>
+<div class="card">
+<div class="title">PathFM: Fast Generative Forecasting of Multivariate Trajectories</div>
+<div class="meta-line">Authors: Jiachen Yao, Xiyuan Zhang, Annan Yu, Boran Han, Abdul Fatir Ansari, Shuai Zhang, Michael Bohlke-Schneider, Bernie Wang</div>
+<div class="meta-line">First: 2026-10-15T17:58:45+00:00 · Latest: 2026-10-15T17:58:45+00:00</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2610.22358v1">Abs</a> · <a href="https://arxiv.org/pdf/2610.22358v1">PDF</a> · <a href="https://huggingface.co/huggingface">Code1</a> · <a href="https://huggingface.co/docs/hub/spaces">Code2</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">Time series foundation models are becoming increasingly popular for general-purpose forecasting. However, most leading models predict marginal quantiles, leaving the dependence structure of future trajectories unspecified. This distinction matters for trajectory-dependent quantities such as cumulative demand, peak load, and event timing, yet point and marginal scores do not reveal it. To model this dependence, we introduce PathFM, a trajectory-based forecasting model that uses flow matching to generate complete future paths. We further distill the model to one or two steps and share history attention cache across draws. Together, these enable PathFM to generate multiple paths for a single series in roughly the time needed for one query to a quantile model. The distilled sampler also makes it practical to optimize a calibration loss directly. PathFM achieves competitive marginal accuracy on the established forecasting benchmarks fev-bench and TIME. To complement these evaluations, we introduce Forecast Path Score Bench (fps-bench), which augments fev-bench tasks with energy and variogram scores and downstream metrics. PathFM achieves a higher aggregate path score on fps-bench than all evaluated external baselines. Experiments on chaotic systems further show that our flow model sustains long-run variability, while strong baselines rapidly collapse. PathFM makes generative time series forecasting both competitive and practical, enabling diverse downstream applications.</div></details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">Time series foundation models are becoming increasingly popular for general-purpose forecasting.</div>
+</details>
+</div>
+<div class="card">
+<div class="title">Twice Upon a Time: Complementary Representations for Time-Series Reasoning</div>
+<div class="meta-line">Authors: Hedi Zisling, Liran Nochumsohn, Ilan Naiman, Mihir Parmar, Omri Azencot</div>
+<div class="meta-line">First: 2026-10-15T17:52:18+00:00 · Latest: 2026-10-15T17:52:18+00:00</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2610.22327v1">Abs</a> · <a href="https://arxiv.org/pdf/2610.22327v1">PDF</a> · <a href="https://huggingface.co/huggingface">Code1</a> · <a href="https://huggingface.co/docs/hub/spaces">Code2</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">Time Series Language Models (TSLMs) enable language-based understanding and reasoning over temporal data, yet a fundamental question remains: what information should their time-series representations preserve, and what variation should they factor out? Existing TSLMs typically expose the language model to a single representation, imposing a fixed inductive bias across downstream tasks. We instead introduce complementary representations as a design principle for time-series reasoning. Our model combines two visual views: line plots preserve absolute measurements and the observed coordinate frame, while normalized delay embeddings factor out positive amplitude rescaling and offsets while exposing temporal structure. Dedicated visual encoders integrate both views into a shared language model through visual tokens and multi-level feature fusion. Evaluation-time interventions verify that the two views exhibit distinct invariance profiles, while single-view ablations show that their combination is particularly beneficial beyond basic perception, with the large gains in prediction and reasoning. Built on Qwen3-VL-8B, our dual-view model improves overall TSRBench accuracy from 44.5% with line plots alone to 53.2%, substantially exceeding the strongest evaluated dedicated TSLM baseline at 36.7%. It further achieves 89.9% accuracy on TSExam and 86.8% numerical accuracy on multivariate ChatTS alignment. Together, these results demonstrate that complementary representations provide an effective design principle for general-purpose TSLMs, enabling models to exploit temporal structure without sacrificing access to the original measurement frame.</div></details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">Time Series Language Models (TSLMs) enable language-based understanding and reasoning over temporal data, yet a fundamental question remains: what information should their time-series representations preserve, and what variation should they factor out?</div>
+</details>
+</div>
+<div class="card">
+<div class="title">Strong invariance principles in deterministic systems</div>
+<div class="meta-line">Authors: Zemer Kosloff, Dalibor Volny</div>
+<div class="meta-line">First: 2026-10-15T15:31:49+00:00 · Latest: 2026-10-15T15:31:49+00:00</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2610.22073v1">Abs</a> · <a href="https://arxiv.org/pdf/2610.22073v1">PDF</a> · <a href="https://huggingface.co/huggingface">Code1</a> · <a href="https://huggingface.co/docs/hub/spaces">Code2</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">We show that in every aperiodic, probability preserving dynamical system there is a function whose associated time series satisfies the almost sure invariance principle with rate asymptotically smaller then $\sqrt{n}$ and the almost sure weak invariance principle of Brosamler and Schatte.</div></details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">We show that in every aperiodic, probability preserving dynamical system there is a function whose associated time series satisfies the almost sure invariance principle with rate asymptotically smaller then $\sqrt{n}$ and the almost sure weak invariance principle of Brosamler and Schatte.</div>
+</details>
+</div>
+<div class="card">
+<div class="title">ChronoSheaf: Joint Spatio-Temporal Spectral Filtering on Cellular Sheaves</div>
+<div class="meta-line">Authors: Abeer Mostafa, Zahra Ahmadi</div>
+<div class="meta-line">First: 2026-10-15T14:20:51+00:00 · Latest: 2026-10-15T14:20:51+00:00</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2610.21958v1">Abs</a> · <a href="https://arxiv.org/pdf/2610.21958v1">PDF</a> · <a href="https://huggingface.co/huggingface">Code1</a> · <a href="https://huggingface.co/docs/hub/spaces">Code2</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">Sheaf neural networks generalize graph neural networks by assigning each edge a learned linear restriction map that specifies how the local representations of adjacent nodes relate to one another, thereby mitigating oversmoothing. Existing sheaf architectures, however, define the sheaf Laplacian as an instantaneous spatial operator and therefore cannot explicitly model how signals evolve over time on a graph. We first introduce a spectral sheaf Laplacian, defined jointly over space and time, such that a single operator regulates signal propagation across both the spatial graph and the temporal domain. Directly extending this operator&#x27;s receptive field in space or time would require increasingly complex sheaf structures. Instead, we propose a spectral filter that expands the effective receptive field along both dimensions without enlarging the underlying sheaf. Building on this operator, we introduce ChronoSheaf, a spatio-temporal sheaf network with two key components. First, Transitional Restriction Maps (TRM) decompose each node&#x27;s restriction map into a spatial term and two temporal frames that independently control its relation to neighboring nodes at the preceding and following timestep, enabling asymmetric temporal influence. Second, the Dual Spectral Filter (DSF) applies a single bounded-degree polynomial filter with an adaptively estimated spectral radius to the joint spatio-temporal sheaf operator. We validate ChronoSheaf on a diverse set of spatio-temporal forecasting benchmarks, where it outperforms state-of-the-art baselines. The code is available at: https://anonymous.4open.science/r/ChronoSheaf-1D7D/.</div></details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">Sheaf neural networks generalize graph neural networks by assigning each edge a learned linear restriction map that specifies how the local representations of adjacent nodes relate to one another, thereby mitigating oversmoothing.</div>
+</details>
+</div>
+<div class="card">
+<div class="title">Sparse Federated Echo State Networks for Time-Series Classification via Smooth-L1 Regularization</div>
+<div class="meta-line">Authors: Gengcheng Lyu, Manuel Röder, Frank-Michael Schleif</div>
+<div class="meta-line">First: 2026-10-15T12:02:04+00:00 · Latest: 2026-10-15T12:02:04+00:00</div>
+<div class="meta-line">Comments: 30 pages, 8 figures, 7 tables. Extended version of a paper presented at IDEAL 2025. Code: https://github.com/oroboro235/FedESN-SmoothL1</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2610.21742v1">Abs</a> · <a href="https://arxiv.org/pdf/2610.21742v1">PDF</a> · <a href="https://github.com/oroboro235/FedESN-SmoothL1">Code1</a> · <a href="https://huggingface.co/huggingface">Code2</a> · <a href="https://huggingface.co/docs/hub/spaces">Code3</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">Echo State Networks (ESNs), as lightweight implementations of reservoir computing, provide efficient solutions for temporal data processing in resource-constrained environments. While standard ESNs offer computational efficiency, their dense readout layers inflate the stored model and the per-sample inference cost. This paper introduces a Smooth-L1 regularized ESN (SL1ESN) that promotes sparsity in the readout layer while preserving differentiability for gradient-based optimization. The method employs a twice-differentiable Smooth-L1 approximation compatible with Newton&#x27;s method, which we exploit both for centralized training and for a second-order (Newton-step) federated aggregation scheme. Under a single fixed shrinkage threshold shared by every dataset and both settings, experiments on seven time-series classification benchmarks show that SL1ESN learns readouts that are $77$--$95\%$ sparse in the centralized setting and $75$--$95\%$ sparse in the federated one, while staying within $0.7$ accuracy points of the strongest dense baseline on five of the seven benchmarks in the centralized setting and within $1.6$ points on the same five in the federated one, and the second-order federated update converges in only a few rounds. The resulting sparsity compresses the stored model, the per-sample inference cost, and the server-to-client broadcast by a comparable factor. These results demonstrate the practical value of sparse readouts for edge computing and IoT deployments.</div></details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">Echo State Networks (ESNs), as lightweight implementations of reservoir computing, provide efficient solutions for temporal data processing in resource-constrained environments.</div>
+</details>
+</div>
+<div class="card">
+<div class="title">Retrieval Over Training: Similarity search-based Model Selection for Time Series Anomaly Detection</div>
+<div class="meta-line">Authors: Christos Panourgias, Roberto Stanzione, Adrien Petralia, Themis Palpanas, Paul Boniol</div>
+<div class="meta-line">First: 2026-10-14T14:18:55+00:00 · Latest: 2026-10-15T11:07:21+00:00</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2610.20243v2">Abs</a> · <a href="https://arxiv.org/pdf/2610.20243v2">PDF</a> · <a href="https://huggingface.co/huggingface">Code1</a> · <a href="https://huggingface.co/docs/hub/spaces">Code2</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">Anomaly detection is a fundamental task for time-series analytics, with important implications for the downstream performance of many applications. Despite the large number of anomaly detection methods proposed in the literature, recent benchmark studies have shown that no single detector performs best across highly heterogeneous time series. Therefore, a practical and scalable solution is to develop a model-selection method that, for a given time series, selects the anomaly detector most likely to perform well. Nevertheless, the model selection approaches proposed in the literature suffer from a significant drop in accuracy when applied in Out-of-Distribution (OOD) settings. In this paper, we tackle the aforementioned limitation and propose RAMSAD, a retrieval-based framework for model selection in time-series anomaly detection. Given a new time series, our method queries a knowledge base of previously observed instances, retrieves the top-k most similar series, and transfers detector recommendations from their performance profiles. The framework can operate with standard similarity measures as well as embedding-based representations. Our results show that RAMSAD outperforms existing baselines in In-Distribution (ID) settings and is the most robust selector in OOD, where, when selecting a small subset of detectors, it matches or exceeds ensembles that run the entire detector pool, at a fraction of their cost. Overall, we demonstrate that similarity-based retrieval constitutes a strong and efficient foundation for model selection in time-series anomaly detection.</div></details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">Anomaly detection is a fundamental task for time-series analytics, with important implications for the downstream performance of many applications.</div>
+</details>
+</div>
+<div class="card">
+<div class="title">Local Temporal Contrasts on Human Motion Data Induce a Latent Geometry</div>
+<div class="meta-line">Authors: Lourenço A. Rodrigues, Felix Putze</div>
+<div class="meta-line">First: 2026-10-15T10:15:56+00:00 · Latest: 2026-10-15T10:15:56+00:00</div>
+<div class="meta-line">Comments: 15 pages, 3 figures, under review</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2610.21630v1">Abs</a> · <a href="https://arxiv.org/pdf/2610.21630v1">PDF</a> · <a href="https://huggingface.co/huggingface">Code1</a> · <a href="https://huggingface.co/docs/hub/spaces">Code2</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">Time series such as recordings of human motion data often encode structure across multiple temporal scales, and when a latent state determining this sequence evolves, this structure needs to survive in the representation space for downstream use. Yet the currently prevalent attention-based encoders paired with sequence-level pooling have made single-vector, pointwise comparison the default mode of inference, discarding the trajectory a sequence traces through the representation space. We propose recovering this geometric structure directly, without relying on forecasting-based objectives, by training an encoder model (SemTAC) with a temporal-neighborhood contrastive loss: representations that satisfy local consistency everywhere must give rise to a coherent global structure, letting inference happen at temporal scales beyond those seen during training. We evaluate SemTAC against four baselines on a five-step motion sequence discrimination task: the same architecture trained with a classification or a standard contrastive objective, and two established self-supervised time-series methods, TS-TCC and TS2Vec. At the full sequence length all five are broadly competitive, but on incomplete, truncated sequences SemTAC holds a large advantage: a median F1 of 0.77 one step before the sequence completes, against 0.27-0.70 for the four baselines. A hyperparameter-matched ablation attributes this effect specifically to the temporal-contrastive objective. SemTAC&#x27;s representation trajectories are also the only ones among these five to exhibit interpretable geometric structures, exceeding a no-structure chance baseline on a displacement-smoothness metric which we introduce. This is evidence that its objective, not classification accuracy alone, produces genuinely temporally-ordered trajectories.</div></details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">Time series such as recordings of human motion data often encode structure across multiple temporal scales, and when a latent state determining this sequence evolves, this structure needs to survive in the representation space for downstream use.</div>
+</details>
+</div>
+<div class="card">
+<div class="title">FANTF: Fuzzy attention network based transformers for time series analysis</div>
+<div class="meta-line">Authors: Sanjay Chakraborty, Fredrik Heintz</div>
+<div class="meta-line">Venue: Information Sciences, 757, 2026</div>
+<div class="meta-line">First: 2025-03-31T17:33:50+00:00 · Latest: 2026-10-15T07:46:02+00:00</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2504.00070v2">Abs</a> · <a href="https://arxiv.org/pdf/2504.00070v2">PDF</a> · <a href="https://huggingface.co/huggingface">Code1</a> · <a href="https://huggingface.co/docs/hub/spaces">Code2</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">This paper introduces Fuzzy Attention Network-Based Transformer (FANTF), an approach for time series forecasting, classification, and anomaly detection. FANTF combines fuzzy logic concepts with transformer architectures through a novel fuzzy attention mechanism. The proposed mechanism is inspired by Type-2 fuzzy set theory. It uses a learnable Gaussian uncertainty perturbation to model uncertainty in attention relevance scores. This makes it possible for the model to accurately capture uncertainty in temporal relationships better than normal deterministic attention. Transformers capacity to record complex temporal patterns and multivariate connections is enhanced by FANTF. The approach is both architecture-agnostic and task-agnostic. The proposed fuzzy attention module can be used as a direct replacement for the standard attention layer. To evaluate its effectiveness, FANTF is integrated into five transformer backbones: Transformer, Informer, PatchTST, Crossformer, and iTransformer. The fuzzy attention mechanism produces softer and more diverse attention distributions. It provides uncertainty-aware interpretations through attention heatmap visualizations. Experimental evaluations on some real-life datasets reveal that FANTF enhances the forecasting performance, classification, and anomaly detection tasks over traditional transformer-based models. FANTF achieves statistically significant and competitive performance improvements over standard transformer-based baselines on most benchmark datasets (p &lt; 0.05, Wilcoxon signed-rank test), observed under noisy and non-stationary time series conditions.</div></details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">This paper introduces Fuzzy Attention Network-Based Transformer (FANTF), an approach for time series forecasting, classification, and anomaly detection.</div>
+</details>
+</div>
+<div class="card">
+<div class="title">CGDT-CESN: Correlation-Guided and Dynamics-Trained Clustered Echo State Network for Multivariate Time-Series Prediction</div>
+<div class="meta-line">Authors: Hariharan Srinivasan, Masoom Bhargava, Sayan Gupta</div>
+<div class="meta-line">First: 2026-10-15T07:32:37+00:00 · Latest: 2026-10-15T07:32:37+00:00</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2610.22430v1">Abs</a> · <a href="https://arxiv.org/pdf/2610.22430v1">PDF</a> · <a href="https://huggingface.co/huggingface">Code1</a> · <a href="https://huggingface.co/docs/hub/spaces">Code2</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">Accurate prediction of multivariate time series requires models that simultaneously capture variable-specific dynamics and cross-variable interactions. In this work, a Correlation-Guided and Dynamics-Trained Clustered Echo State Network (CGDT-CESN) is proposed, which comprises a modular reservoir architecture with each cluster distinctly specializing in one of the variables in the multivariate time series. An innovative reservoir design is proposed in which inter-cluster connections are enabled by empirically observed correlations among variables, providing a data-driven coupling mechanism. Apart from conventional readout training, inter-cluster connection weights informed by correlations are trained, which in turn allows the reservoir to capture time-varying cross-variable dependencies without sacrificing computational efficiency and further improves forecasting accuracy. The prediction performance of CGDT-CESN is found to be superior to that of the conventional ESN when evaluated on two fundamentally different datasets: Twitter information cascade evolution and solar wind forecasting. Also, the improvement in performance is preserved across multiple prediction horizons, even when presented with a low volume of data. By unifying cluster-specific specialization with learned inter-variable coupling, CGDT-CESN offers a principled, data-driven route to multivariate time series prediction.</div></details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">Accurate prediction of multivariate time series requires models that simultaneously capture variable-specific dynamics and cross-variable interactions.</div>
+</details>
+</div>
+<div class="card">
+<div class="title">Learning to Forecast on Multiple Spatiotemporal Hierarchies</div>
+<div class="meta-line">Authors: Valentina Moretti, Cesare Alippi, Andrea Cini</div>
+<div class="meta-line">First: 2026-10-15T07:29:32+00:00 · Latest: 2026-10-15T07:29:32+00:00</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2610.21414v1">Abs</a> · <a href="https://arxiv.org/pdf/2610.21414v1">PDF</a> · <a href="https://huggingface.co/huggingface">Code1</a> · <a href="https://huggingface.co/docs/hub/spaces">Code2</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">Hierarchical forecasting exploits aggregation structures that expose multiple views of the same underlying spatiotemporal forecasting problem, while ensuring coherence among forecasts. Individual series provide fine-grained information, while progressively coarser aggregates reveal temporal and spatial patterns at different scales. In the associated deep learning architectures, the hierarchy determines which aggregate series are available and how they are processed together with individual series (e.g., through reconciliation or message-passing operators). Different hierarchies thus provide distinct learning signals and inductive biases for forecasting the same collection of time series. Nonetheless, existing architectures are typically trained on a single, often fixed, structure. In this work, we propose a graph deep learning framework that leverages variations across hierarchies as multi-task regularization. We show that jointly learning across these structures can reduce over-specialization to any single hierarchy and improve forecasting performance. Indeed, training across hierarchies provides an inductive bias toward representations that are useful across different structures, and as such, generalize better. Making forecasts coherent with the aggregation constraints for each sampled hierarchy is computationally expensive: to complement the framework, we propose a novel operator-based on a top-down approach-that produces coherent forecasts with linear time and space complexity w.r.t. the hierarchy size. Experiments show that our approach improves forecasting accuracy over training on a single structure and is competitive with current state-of-the-art methods.</div></details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">Hierarchical forecasting exploits aggregation structures that expose multiple views of the same underlying spatiotemporal forecasting problem, while ensuring coherence among forecasts.</div>
+</details>
+</div>
+<div class="card">
+<div class="title">PocketTSLM: Deploying an On-Device Soft-Prompt Time-Series Language Model for Privacy-Preserving Smartphone Reasoning</div>
+<div class="meta-line">Authors: Max Rosenblattl, Nikhil Krishnaswamy, Leon Nissen, Manuel Milling, Nicolas Zumarraga, Ning Wang, Thomas Kaar, Robert Jakob, Björn W. Schuller, Elgar Fleisch, Patrick Langer, Paul Schmiedmayer</div>
+<div class="meta-line">First: 2026-10-15T05:56:53+00:00 · Latest: 2026-10-15T05:56:53+00:00</div>
+<div class="meta-line">Comments: 15 pages, 3 figures. A version of this paper was accepted at the Workshop on Deploying AI in Healthcare (DAIH) at COLM 2026. Code: https://github.com/SchmiedmayerLab/PocketTSLM</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2610.21308v1">Abs</a> · <a href="https://arxiv.org/pdf/2610.21308v1">PDF</a> · <a href="https://github.com/SchmiedmayerLab/PocketTSLM">Code1</a> · <a href="https://huggingface.co/huggingface">Code2</a> · <a href="https://huggingface.co/docs/hub/spaces">Code3</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">Consumer phones and wearables increasingly collect physiological time-series data, yet most mobile systems treat these streams as summaries or text rather than as temporal evidence. This representation is poorly matched to personal health systems that need to retrieve, route, or summarize sensor evidence while preserving temporal structure. Cloud-hosted time-series language models avoid smartphone limits, but they repeatedly move sensitive physiology off the device and add latency and per-query compute cost. Mobile model alternatives that aggregate time-series data into statistical features or serialize raw samples as text either compress temporal structure or exhaust the context and memory budgets of small on-device models. We present PocketTSLM, a mobile-native deployment of OpenTSLM SoftPrompt, the soft-prompt variant of the OpenTSLM time-series language model. PocketTSLM runs fully on a consumer smartphone by injecting encoded time-series windows as embeddings instead of tokenizing time series as text. A numerical parity protocol verifies identical greedy-decoded token sequences between the Swift port and a Python reference using Apple&#x27;s MLX machine-learning framework. Answers also match the PyTorch reference, although rationale wording can differ. An on-device context-economics benchmark compares the soft-prompt path with a text-serialized baseline on the same backbone. In our benchmark format, soft-prompting uses approximately 12 times fewer time-series tokens and reduces prompt-prefill cost. PocketTSLM processes 30-second Sleep-EDF electroencephalography clips for sleep staging and a 1,000-sample (10 s) 12-lead electrocardiogram clip from ECG-QA. In comparison, text-serialized baselines exceed the phone&#x27;s context or memory budget at longer time-series windows. All inference runs entirely on the device, with no health data transmitted during inference.</div></details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">Consumer phones and wearables increasingly collect physiological time-series data, yet most mobile systems treat these streams as summaries or text rather than as temporal evidence.</div>
+</details>
+</div></div>
+    <details style="margin-top:16px" class="detail"><summary>History</summary>
+      <div class="history-list"><a href="archive/20261019_0515.html">20261019_0515</a>
+<a href="archive/20261018_0513.html">20261018_0513</a>
+<a href="archive/20261017_0555.html">20261017_0555</a>
+<a href="archive/20261016_0555.html">20261016_0555</a>
+<a href="archive/20261015_0603.html">20261015_0603</a>
+<a href="archive/20261014_0711.html">20261014_0711</a>
+<a href="archive/20261013_0908.html">20261013_0908</a>
+<a href="archive/20261012_0640.html">20261012_0640</a>
+<a href="archive/20261011_0612.html">20261011_0612</a>
+<a href="archive/20261010_0701.html">20261010_0701</a>
+<a href="archive/20261009_0738.html">20261009_0738</a>
+<a href="archive/20261008_0727.html">20261008_0727</a>
+<a href="archive/20261007_0653.html">20261007_0653</a>
+<a href="archive/20261006_0835.html">20261006_0835</a>
+<a href="archive/20261005_0611.html">20261005_0611</a>
+<a href="archive/20261004_0559.html">20261004_0559</a>
+<a href="archive/20261003_0655.html">20261003_0655</a>
+<a href="archive/20261002_0659.html">20261002_0659</a>
+<a href="archive/20261001_0650.html">20261001_0650</a>
+<a href="archive/20260930_0650.html">20260930_0650</a>
+<a href="archive/20260929_0742.html">20260929_0742</a>
+<a href="archive/20260928_0550.html">20260928_0550</a>
+<a href="archive/20260927_0549.html">20260927_0549</a>
+<a href="archive/20260926_0559.html">20260926_0559</a>
+<a href="archive/20260925_0558.html">20260925_0558</a>
+<a href="archive/20260924_0603.html">20260924_0603</a>
+<a href="archive/20260923_0546.html">20260923_0546</a>
+<a href="archive/20260922_0626.html">20260922_0626</a>
+<a href="archive/20260921_0510.html">20260921_0510</a>
+<a href="archive/20260920_0518.html">20260920_0518</a>
+<a href="archive/20260919_0525.html">20260919_0525</a>
+<a href="archive/20260918_0555.html">20260918_0555</a>
+<a href="archive/20260917_0555.html">20260917_0555</a>
+<a href="archive/20260916_0555.html">20260916_0555</a>
+<a href="archive/20260915_0616.html">20260915_0616</a>
+<a href="archive/20260913_0512.html">20260913_0512</a>
+<a href="archive/20260912_0532.html">20260912_0532</a>
+<a href="archive/20260911_0524.html">20260911_0524</a>
+<a href="archive/20260910_0530.html">20260910_0530</a>
+<a href="archive/20260908_0555.html">20260908_0555</a>
+<a href="archive/20260907_0502.html">20260907_0502</a>
+<a href="archive/20260906_0455.html">20260906_0455</a>
+<a href="archive/20260905_0514.html">20260905_0514</a>
+<a href="archive/20260904_0533.html">20260904_0533</a>
+<a href="archive/20260903_0536.html">20260903_0536</a>
+<a href="archive/20260902_0535.html">20260902_0535</a>
+<a href="archive/20260901_0706.html">20260901_0706</a>
+<a href="archive/20260831_0550.html">20260831_0550</a>
+<a href="archive/20260830_0530.html">20260830_0530</a>
+<a href="archive/20260829_0959.html">20260829_0959</a>
+<a href="archive/20260828_1025.html">20260828_1025</a>
+<a href="archive/20260827_0539.html">20260827_0539</a>
+<a href="archive/20260826_0329.html">20260826_0329</a>
+<a href="archive/20260825_0327.html">20260825_0327</a>
+<a href="archive/20260824_0320.html">20260824_0320</a>
+<a href="archive/20260823_0320.html">20260823_0320</a>
+<a href="archive/20260822_0324.html">20260822_0324</a>
+<a href="archive/20260821_0328.html">20260821_0328</a>
+<a href="archive/20260820_0328.html">20260820_0328</a>
+<a href="archive/20260819_0326.html">20260819_0326</a>
+<a href="archive/20260818_0325.html">20260818_0325</a>
+<a href="archive/20260817_0319.html">20260817_0319</a>
+<a href="archive/20260816_0319.html">20260816_0319</a>
+<a href="archive/20260815_0346.html">20260815_0346</a>
+<a href="archive/20260814_0355.html">20260814_0355</a>
+<a href="archive/20260813_0359.html">20260813_0359</a>
+<a href="archive/20260812_0359.html">20260812_0359</a>
+<a href="archive/20260811_0354.html">20260811_0354</a>
+<a href="archive/20260810_0331.html">20260810_0331</a>
+<a href="archive/20260809_0327.html">20260809_0327</a>
+<a href="archive/20260808_0351.html">20260808_0351</a>
+<a href="archive/20260807_0840.html">20260807_0840</a>
+<a href="archive/20260806_0425.html">20260806_0425</a>
+<a href="archive/20260805_0422.html">20260805_0422</a>
+<a href="archive/20260804_0425.html">20260804_0425</a>
+<a href="archive/20260803_0408.html">20260803_0408</a>
+<a href="archive/20260802_0408.html">20260802_0408</a>
+<a href="archive/20260801_0418.html">20260801_0418</a>
+<a href="archive/20260731_0413.html">20260731_0413</a>
+<a href="archive/20260730_0411.html">20260730_0411</a>
+<a href="archive/20260729_0415.html">20260729_0415</a>
+<a href="archive/20260728_0420.html">20260728_0420</a>
+<a href="archive/20260727_0410.html">20260727_0410</a>
+<a href="archive/20260726_0409.html">20260726_0409</a>
+<a href="archive/20260725_0418.html">20260725_0418</a>
+<a href="archive/20260724_0410.html">20260724_0410</a>
+<a href="archive/20260723_0410.html">20260723_0410</a>
+<a href="archive/20260722_0417.html">20260722_0417</a>
+<a href="archive/20260721_0419.html">20260721_0419</a>
+<a href="archive/20260720_0405.html">20260720_0405</a>
+<a href="archive/20260719_0402.html">20260719_0402</a>
+<a href="archive/20260718_0404.html">20260718_0404</a>
+<a href="archive/20260717_0401.html">20260717_0401</a>
+<a href="archive/20260716_0406.html">20260716_0406</a>
+<a href="archive/20260715_0408.html">20260715_0408</a>
+<a href="archive/20260714_0413.html">20260714_0413</a>
+<a href="archive/20260713_0405.html">20260713_0405</a>
+<a href="archive/20260712_0404.html">20260712_0404</a>
+<a href="archive/20260711_0421.html">20260711_0421</a>
+<a href="archive/20260710_0446.html">20260710_0446</a>
+<a href="archive/20260709_0419.html">20260709_0419</a>
+<a href="archive/20260708_0448.html">20260708_0448</a>
+<a href="archive/20260707_0451.html">20260707_0451</a>
+<a href="archive/20260706_0412.html">20260706_0412</a>
+<a href="archive/20260705_0408.html">20260705_0408</a>
+<a href="archive/20260704_0413.html">20260704_0413</a>
+<a href="archive/20260703_0417.html">20260703_0417</a>
+<a href="archive/20260702_0448.html">20260702_0448</a>
+<a href="archive/20260701_0456.html">20260701_0456</a>
+<a href="archive/20260630_0448.html">20260630_0448</a>
+<a href="archive/20260629_0411.html">20260629_0411</a>
+<a href="archive/20260627_0446.html">20260627_0446</a>
+<a href="archive/20260626_0454.html">20260626_0454</a>
+<a href="archive/20260625_0447.html">20260625_0447</a>
+<a href="archive/20260624_0459.html">20260624_0459</a>
+<a href="archive/20260623_0530.html">20260623_0530</a>
+<a href="archive/20260622_0424.html">20260622_0424</a>
+<a href="archive/20260621_0413.html">20260621_0413</a>
+<a href="archive/20260620_0425.html">20260620_0425</a>
+<a href="archive/20260619_0534.html">20260619_0534</a>
+<a href="archive/20260618_0503.html">20260618_0503</a>
+<a href="archive/20260617_0541.html">20260617_0541</a>
+<a href="archive/20260616_0541.html">20260616_0541</a>
+<a href="archive/20260615_0416.html">20260615_0416</a>
+<a href="archive/20260614_0414.html">20260614_0414</a>
+<a href="archive/20260613_0502.html">20260613_0502</a>
+<a href="archive/20260612_0518.html">20260612_0518</a>
+<a href="archive/20260611_0524.html">20260611_0524</a>
+<a href="archive/20260610_0455.html">20260610_0455</a>
+<a href="archive/20260609_0511.html">20260609_0511</a>
+<a href="archive/20260608_0410.html">20260608_0410</a>
+<a href="archive/20260607_0408.html">20260607_0408</a>
+<a href="archive/20260606_0447.html">20260606_0447</a>
+<a href="archive/20260604_0547.html">20260604_0547</a>
+<a href="archive/20260603_0546.html">20260603_0546</a>
+<a href="archive/20260602_0609.html">20260602_0609</a>
+<a href="archive/20260601_0406.html">20260601_0406</a>
+<a href="archive/20260531_0408.html">20260531_0408</a>
+<a href="archive/20260530_0507.html">20260530_0507</a>
+<a href="archive/20260528_0501.html">20260528_0501</a>
+<a href="archive/20260527_0452.html">20260527_0452</a>
+<a href="archive/20260526_0421.html">20260526_0421</a>
+<a href="archive/20260524_0404.html">20260524_0404</a>
+<a href="archive/20260523_0442.html">20260523_0442</a>
+<a href="archive/20260522_0450.html">20260522_0450</a>
+<a href="archive/20260521_0458.html">20260521_0458</a>
+<a href="archive/20260520_0428.html">20260520_0428</a>
+<a href="archive/20260519_0423.html">20260519_0423</a>
+<a href="archive/20260518_0403.html">20260518_0403</a>
+<a href="archive/20260517_0401.html">20260517_0401</a>
+<a href="archive/20260516_0415.html">20260516_0415</a>
+<a href="archive/20260515_0427.html">20260515_0427</a>
+<a href="archive/20260514_0444.html">20260514_0444</a>
+<a href="archive/20260513_0428.html">20260513_0428</a>
+<a href="archive/20260512_0446.html">20260512_0446</a>
+<a href="archive/20260511_0359.html">20260511_0359</a>
+<a href="archive/20260510_0357.html">20260510_0357</a>
+<a href="archive/20260509_0406.html">20260509_0406</a>
+<a href="archive/20260508_0413.html">20260508_0413</a>
+<a href="archive/20260507_0421.html">20260507_0421</a>
+<a href="archive/20260506_0406.html">20260506_0406</a>
+<a href="archive/20260505_0413.html">20260505_0413</a>
+<a href="archive/20260504_0354.html">20260504_0354</a>
+<a href="archive/20260503_0354.html">20260503_0354</a>
+<a href="archive/20260502_0403.html">20260502_0403</a>
+<a href="archive/20260501_0408.html">20260501_0408</a>
+<a href="archive/20260430_0409.html">20260430_0409</a>
+<a href="archive/20260429_0414.html">20260429_0414</a>
+<a href="archive/20260428_0407.html">20260428_0407</a>
+<a href="archive/20260427_0344.html">20260427_0344</a>
+<a href="archive/20260426_0343.html">20260426_0343</a>
+<a href="archive/20260425_0351.html">20260425_0351</a>
+<a href="archive/20260424_0404.html">20260424_0404</a>
+<a href="archive/20260423_0404.html">20260423_0404</a>
+<a href="archive/20260422_0402.html">20260422_0402</a>
+<a href="archive/20260421_0359.html">20260421_0359</a>
+<a href="archive/20260420_0340.html">20260420_0340</a>
+<a href="archive/20260419_0340.html">20260419_0340</a>
+<a href="archive/20260418_0358.html">20260418_0358</a>
+<a href="archive/20260417_0359.html">20260417_0359</a>
+<a href="archive/20260416_0402.html">20260416_0402</a>
+<a href="archive/20260415_0404.html">20260415_0404</a>
+<a href="archive/20260414_0404.html">20260414_0404</a>
+<a href="archive/20260413_0338.html">20260413_0338</a>
+<a href="archive/20260412_0334.html">20260412_0334</a>
+<a href="archive/20260411_0342.html">20260411_0342</a>
+<a href="archive/20260410_0401.html">20260410_0401</a>
+<a href="archive/20260409_0358.html">20260409_0358</a>
+<a href="archive/20260408_0355.html">20260408_0355</a>
+<a href="archive/20260407_0352.html">20260407_0352</a>
+<a href="archive/20260406_0333.html">20260406_0333</a>
+<a href="archive/20260405_0329.html">20260405_0329</a>
+<a href="archive/20260404_0337.html">20260404_0337</a>
+<a href="archive/20260403_0350.html">20260403_0350</a>
+<a href="archive/20260401_0354.html">20260401_0354</a>
+<a href="archive/20260331_0355.html">20260331_0355</a>
+<a href="archive/20260330_0334.html">20260330_0334</a>
+<a href="archive/20260329_0330.html">20260329_0330</a>
+<a href="archive/20260328_0340.html">20260328_0340</a>
+<a href="archive/20260327_0354.html">20260327_0354</a>
+<a href="archive/20260326_0346.html">20260326_0346</a>
+<a href="archive/20260325_0352.html">20260325_0352</a>
+<a href="archive/20260323_0324.html">20260323_0324</a>
+<a href="archive/20260322_0323.html">20260322_0323</a>
+<a href="archive/20260321_0336.html">20260321_0336</a>
+<a href="archive/20260320_0345.html">20260320_0345</a>
+<a href="archive/20260319_0347.html">20260319_0347</a>
+<a href="archive/20260318_0353.html">20260318_0353</a>
+<a href="archive/20260317_0352.html">20260317_0352</a>
+<a href="archive/20260316_0327.html">20260316_0327</a>
+<a href="archive/20260315_0326.html">20260315_0326</a>
+<a href="archive/20260314_0330.html">20260314_0330</a>
+<a href="archive/20260313_0341.html">20260313_0341</a>
+<a href="archive/20260312_0341.html">20260312_0341</a>
+<a href="archive/20260311_0337.html">20260311_0337</a>
+<a href="archive/20260310_0340.html">20260310_0340</a>
+<a href="archive/20260309_0322.html">20260309_0322</a>
+<a href="archive/20260308_0320.html">20260308_0320</a>
+<a href="archive/20260307_0333.html">20260307_0333</a>
+<a href="archive/20260306_0351.html">20260306_0351</a>
+<a href="archive/20260305_0337.html">20260305_0337</a>
+<a href="archive/20260304_0338.html">20260304_0338</a>
+<a href="archive/20260303_0336.html">20260303_0336</a>
+<a href="archive/20260302_0321.html">20260302_0321</a>
+<a href="archive/20260301_0319.html">20260301_0319</a>
+<a href="archive/20260228_0335.html">20260228_0335</a>
+<a href="archive/20260227_0343.html">20260227_0343</a>
+<a href="archive/20260226_0348.html">20260226_0348</a>
+<a href="archive/20260225_0348.html">20260225_0348</a>
+<a href="archive/20260224_0355.html">20260224_0355</a>
+<a href="archive/20260223_0323.html">20260223_0323</a>
+<a href="archive/20260222_0323.html">20260222_0323</a>
+<a href="archive/20260221_0336.html">20260221_0336</a>
+<a href="archive/20260220_0338.html">20260220_0338</a>
+<a href="archive/20260219_0348.html">20260219_0348</a>
+<a href="archive/20260218_0346.html">20260218_0346</a>
+<a href="archive/20260217_0331.html">20260217_0331</a>
+<a href="archive/20260216_0324.html">20260216_0324</a>
+<a href="archive/20260215_0322.html">20260215_0322</a>
+<a href="archive/20260213_0348.html">20260213_0348</a>
+<a href="archive/20260212_0355.html">20260212_0355</a>
+<a href="archive/20260211_0358.html">20260211_0358</a>
+<a href="archive/20260210_0401.html">20260210_0401</a>
+<a href="archive/20260208_0323.html">20260208_0323</a>
+<a href="archive/20260207_0337.html">20260207_0337</a>
+<a href="archive/20260206_0336.html">20260206_0336</a>
+<a href="archive/20260205_0338.html">20260205_0338</a>
+<a href="archive/20260204_0344.html">20260204_0344</a>
+<a href="archive/20260202_0323.html">20260202_0323</a>
+<a href="archive/20260201_0320.html">20260201_0320</a>
+<a href="archive/20260131_0331.html">20260131_0331</a>
+<a href="archive/20260130_0330.html">20260130_0330</a>
+<a href="archive/20260129_0327.html">20260129_0327</a>
+<a href="archive/20260127_0323.html">20260127_0323</a>
+<a href="archive/20260126_0316.html">20260126_0316</a>
+<a href="archive/20260125_0316.html">20260125_0316</a>
+<a href="archive/20260124_0323.html">20260124_0323</a>
+<a href="archive/20260123_0324.html">20260123_0324</a>
+<a href="archive/20260122_0326.html">20260122_0326</a>
+<a href="archive/20260121_0411.html">20260121_0411</a>
+<a href="archive/20260120_0319.html">20260120_0319</a>
+<a href="archive/20260119_0315.html">20260119_0315</a>
+<a href="archive/20260118_0315.html">20260118_0315</a>
+<a href="archive/20260117_0319.html">20260117_0319</a>
+<a href="archive/20260116_0323.html">20260116_0323</a>
+<a href="archive/20260115_0318.html">20260115_0318</a>
+<a href="archive/20260114_0319.html">20260114_0319</a>
+<a href="archive/20260113_0320.html">20260113_0320</a>
+<a href="archive/20260112_0315.html">20260112_0315</a>
+<a href="archive/20260111_0315.html">20260111_0315</a>
+<a href="archive/20260110_0319.html">20260110_0319</a>
+<a href="archive/20260109_0319.html">20260109_0319</a>
+<a href="archive/20260108_0320.html">20260108_0320</a>
+<a href="archive/20260107_0316.html">20260107_0316</a>
+<a href="archive/20260106_0320.html">20260106_0320</a>
+<a href="archive/20260105_0315.html">20260105_0315</a>
+<a href="archive/20260104_2357.html">20260104_2357</a>
+<a href="archive/20260104_0328.html">20260104_0328</a>
+<a href="archive/20260103_0325.html">20260103_0325</a>
+<a href="archive/20260102_0339.html">20260102_0339</a>
+<a href="archive/20260101_0329.html">20260101_0329</a>
+<a href="archive/20251231_0333.html">20251231_0333</a>
+<a href="archive/20251230_0332.html">20251230_0332</a>
+<a href="archive/20251229_0329.html">20251229_0329</a>
+<a href="archive/20251228_0332.html">20251228_0332</a>
+<a href="archive/20251227_0329.html">20251227_0329</a>
+<a href="archive/20251226_0330.html">20251226_0330</a>
+<a href="archive/20251225_0329.html">20251225_0329</a>
+<a href="archive/20251224_0331.html">20251224_0331</a>
+<a href="archive/20251223_0332.html">20251223_0332</a>
+<a href="archive/20251222_0328.html">20251222_0328</a>
+<a href="archive/20251221_0329.html">20251221_0329</a>
+<a href="archive/20251220_0330.html">20251220_0330</a>
+<a href="archive/20251219_0330.html">20251219_0330</a>
+<a href="archive/20251218_0345.html">20251218_0345</a>
+<a href="archive/20251217_0332.html">20251217_0332</a>
+<a href="archive/20251216_0333.html">20251216_0333</a>
+<a href="archive/20251215_0333.html">20251215_0333</a>
+<a href="archive/20251214_0327.html">20251214_0327</a>
+<a href="archive/20251212_0333.html">20251212_0333</a>
+<a href="archive/20251211_0331.html">20251211_0331</a>
+<a href="archive/20251210_0332.html">20251210_0332</a>
+<a href="archive/20251209_0331.html">20251209_0331</a>
+<a href="archive/20251208_0328.html">20251208_0328</a>
+<a href="archive/20251207_0327.html">20251207_0327</a>
+<a href="archive/20251206_0330.html">20251206_0330</a>
+<a href="archive/20251205_0331.html">20251205_0331</a>
+<a href="archive/20251204_0331.html">20251204_0331</a>
+<a href="archive/20251203_0333.html">20251203_0333</a>
+<a href="archive/20251202_0335.html">20251202_0335</a>
+<a href="archive/20251201_0328.html">20251201_0328</a>
+<a href="archive/20251130_0327.html">20251130_0327</a>
+<a href="archive/20251129_0328.html">20251129_0328</a>
+<a href="archive/20251128_0327.html">20251128_0327</a>
+<a href="archive/20251127_0327.html">20251127_0327</a>
+<a href="archive/20251126_0329.html">20251126_0329</a>
+<a href="archive/20251125_0327.html">20251125_0327</a>
+<a href="archive/20251124_0327.html">20251124_0327</a>
+<a href="archive/20251123_0326.html">20251123_0326</a>
+<a href="archive/20251122_0328.html">20251122_0328</a>
+<a href="archive/20251121_0328.html">20251121_0328</a>
+<a href="archive/20251120_0329.html">20251120_0329</a>
+<a href="archive/20251119_0328.html">20251119_0328</a>
+<a href="archive/20251118_0328.html">20251118_0328</a>
+<a href="archive/20251117_0326.html">20251117_0326</a>
+<a href="archive/20251116_0325.html">20251116_0325</a>
+<a href="archive/20251115_0327.html">20251115_0327</a>
+<a href="archive/20251114_0328.html">20251114_0328</a>
+<a href="archive/20251113_0330.html">20251113_0330</a>
+<a href="archive/20251112_0329.html">20251112_0329</a>
+<a href="archive/20251111_0328.html">20251111_0328</a>
+<a href="archive/20251110_0325.html">20251110_0325</a>
+<a href="archive/20251109_0326.html">20251109_0326</a>
+<a href="archive/20251108_0328.html">20251108_0328</a>
+<a href="archive/20251107_0328.html">20251107_0328</a>
+<a href="archive/20251106_0329.html">20251106_0329</a>
+<a href="archive/20251105_0326.html">20251105_0326</a>
+<a href="archive/20251104_0327.html">20251104_0327</a>
+<a href="archive/20251103_0324.html">20251103_0324</a>
+<a href="archive/20251102_0326.html">20251102_0326</a>
+<a href="archive/20251101_0324.html">20251101_0324</a>
+<a href="archive/20251031_0328.html">20251031_0328</a>
+<a href="archive/20251030_0330.html">20251030_0330</a>
+<a href="archive/20251029_0329.html">20251029_0329</a>
+<a href="archive/20251028_0329.html">20251028_0329</a>
+<a href="archive/20251027_0322.html">20251027_0322</a>
+<a href="archive/20251026_0327.html">20251026_0327</a>
+<a href="archive/20251025_0331.html">20251025_0331</a>
+<a href="archive/20251024_0329.html">20251024_0329</a>
+<a href="archive/20251023_0329.html">20251023_0329</a>
+<a href="archive/20251022_0330.html">20251022_0330</a>
+<a href="archive/20251021_0331.html">20251021_0331</a>
+<a href="archive/20251020_0328.html">20251020_0328</a>
+<a href="archive/20251019_0321.html">20251019_0321</a>
+<a href="archive/20251018_0327.html">20251018_0327</a>
+<a href="archive/20251017_0320.html">20251017_0320</a>
+<a href="archive/20251016_0328.html">20251016_0328</a>
+<a href="archive/20251015_0328.html">20251015_0328</a>
+<a href="archive/20251014_0323.html">20251014_0323</a>
+<a href="archive/20251011_0328.html">20251011_0328</a>
+<a href="archive/20251010_0330.html">20251010_0330</a>
+<a href="archive/20251009_0321.html">20251009_0321</a>
+<a href="archive/20251008_0343.html">20251008_0343</a>
+<a href="archive/20251007_0353.html">20251007_0353</a>
+<a href="archive/20251006_0325.html">20251006_0325</a>
+<a href="archive/20251005_0350.html">20251005_0350</a>
+<a href="archive/20251004_0352.html">20251004_0352</a>
+<a href="archive/20251003_0352.html">20251003_0352</a>
+<a href="archive/20251002_0356.html">20251002_0356</a>
+<a href="archive/20251001_0321.html">20251001_0321</a>
+<a href="archive/20250925_0335.html">20250925_0335</a>
+<a href="archive/20250924_0350.html">20250924_0350</a>
+<a href="archive/20250923_0348.html">20250923_0348</a>
+<a href="archive/20250922_0346.html">20250922_0346</a>
+<a href="archive/20250921_0345.html">20250921_0345</a>
+<a href="archive/20250920_0342.html">20250920_0342</a>
+<a href="archive/20250919_0346.html">20250919_0346</a>
+<a href="archive/20250918_0342.html">20250918_0342</a>
+<a href="archive/20250917_0336.html">20250917_0336</a>
+<a href="archive/20250916_0333.html">20250916_0333</a>
+<a href="archive/20250915_0333.html">20250915_0333</a>
+<a href="archive/20250914_0328.html">20250914_0328</a>
+<a href="archive/20250913_0322.html">20250913_0322</a>
+<a href="archive/20250912_0335.html">20250912_0335</a>
+<a href="archive/20250911_0337.html">20250911_0337</a>
+<a href="archive/20250910_0338.html">20250910_0338</a>
+<a href="archive/20250909_0341.html">20250909_0341</a>
+<a href="archive/20250908_0342.html">20250908_0342</a>
+<a href="archive/20250907_0333.html">20250907_0333</a>
+<a href="archive/20250906_0350.html">20250906_0350</a>
+<a href="archive/20250905_0319.html">20250905_0319</a>
+<a href="archive/20250904_0323.html">20250904_0323</a>
+<a href="archive/20250903_0355.html">20250903_0355</a>
+<a href="archive/20250902_0325.html">20250902_0325</a>
+<a href="archive/20250901_0355.html">20250901_0355</a>
+<a href="archive/20250831_0355.html">20250831_0355</a>
+<a href="archive/20250830_0356.html">20250830_0356</a>
+<a href="archive/20250829_0355.html">20250829_0355</a>
+<a href="archive/20250828_0333.html">20250828_0333</a>
+<a href="archive/20250827_1654.html">20250827_1654</a>
+<a href="archive/20250827_1602.html">20250827_1602</a>
+<a href="archive/20250827_1557.html">20250827_1557</a>
+<a href="archive/20250827_0320.html">20250827_0320</a>
+<a href="archive/20250826_0320.html">20250826_0320</a>
+<a href="archive/20250825_1752.html">20250825_1752</a>
+<a href="archive/20250825_1709.html">20250825_1709</a>
+<a href="archive/20250825_1652.html">20250825_1652</a>
+<a href="archive/20250825_1647.html">20250825_1647</a>
+<a href="archive/20250825_1645.html">20250825_1645</a>
+<a href="archive/20250825_1631.html">20250825_1631</a>
+<a href="archive/20250825_1606.html">20250825_1606</a>
+<a href="archive/20250825_1559.html">20250825_1559</a>
+<a href="archive/20250825_1558.html">20250825_1558</a>
+<a href="archive/20250825_1556.html">20250825_1556</a>
+<a href="archive/20250825_1531.html">20250825_1531</a>
+<a href="archive/20250825_1525.html">20250825_1525</a>
+<a href="archive/20250825_1516.html">20250825_1516</a>
+<a href="archive/20250825_1450.html">20250825_1450</a>
+<a href="archive/20250825_1444.html">20250825_1444</a>
+<a href="archive/20250825_1438.html">20250825_1438</a>
+<a href="archive/20250825_1414.html">20250825_1414</a>
+<a href="archive/20250825_1413.html">20250825_1413</a>
+<a href="archive/20250825_1410.html">20250825_1410</a>
+<a href="archive/20250825_1408.html">20250825_1408</a>
+<a href="archive/20250825_1405.html">20250825_1405</a>
+<a href="archive/20250825_1401.html">20250825_1401</a>
+<a href="archive/20250825_1355.html">20250825_1355</a>
+<a href="archive/20250825_1347.html">20250825_1347</a>
+<a href="archive/20250825_1345.html">20250825_1345</a>
+<a href="archive/20250825_1344.html">20250825_1344</a>
+<a href="archive/20250825_1343.html">20250825_1343</a>
+<a href="archive/20250825_1340.html">20250825_1340</a>
+<a href="archive/20250825_1339.html">20250825_1339</a>
+<a href="archive/20250825_1333.html">20250825_1333</a>
+<a href="archive/20250825_1323.html">20250825_1323</a>
+<a href="archive/20250825_1317.html">20250825_1317</a>
+<a href="archive/20250825_1243.html">20250825_1243</a>
+<a href="archive/20250824_0342.html">20250824_0342</a>
+<a href="archive/20250823_0343.html">20250823_0343</a>
+<a href="archive/20250823_0142.html">20250823_0142</a>
+<a href="archive/20250822_2331.html">20250822_2331</a>
+<a href="archive/20250822_2308.html">20250822_2308</a>
+<a href="archive/20250822_2258.html">20250822_2258</a>
+<a href="archive/20250822_2241.html">20250822_2241</a>
+<a href="archive/20250822_2228.html">20250822_2228</a>
+<a href="archive/20250822_2206.html">20250822_2206</a>
+<a href="archive/20250822_2147.html">20250822_2147</a>
+<a href="archive/20250822_2111.html">20250822_2111</a>
+<a href="archive/20250822_1259.html">20250822_1259</a>
+<a href="archive/20250822_1233.html">20250822_1233</a>
+<a href="archive/20250822_1229.html">20250822_1229</a>
+<a href="archive/20250822_1223.html">20250822_1223</a>
+<a href="archive/20250822_1210.html">20250822_1210</a>
+<a href="archive/20250822_1201.html">20250822_1201</a>
+<a href="archive/20250822_1111.html">20250822_1111</a>
+<a href="archive/20250822_1058.html">20250822_1058</a>
+<a href="archive/20250822_1052.html">20250822_1052</a>
+<a href="archive/20250822_1045.html">20250822_1045</a>
+<a href="archive/20250822_0657.html">20250822_0657</a>
+<a href="archive/20250822_0553.html">20250822_0553</a></div>
+    </details>
+    <div class="footer">Generated by arxiv-tracker</div>
+  </div>
+</body></html>
